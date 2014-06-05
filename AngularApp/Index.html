@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="apiApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <link href="Scripts/Libs/Bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="Scripts/Libs/Bootstrap/bootstrap-datetimepicker.css" rel="stylesheet" />
+    
+    <link href="Site.css" rel="stylesheet" />
+    
+    <link href="Scripts/Libs/AngularGrowl/angular-growl.min.css" rel="stylesheet" />
+
+</head>
+<body ng-app="apiApp" ng-controller="mainController">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="menuDiv" ui-view="menuView">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="contentDiv" style="padding-top: 70px;" ui-view="contentView">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div growl=""></div>
+</body>
+
+    <!--include jquery before angular for scripts on views to work-->
+    <script src="Scripts/Libs/Jquery/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/Libs/Jquery/jquery.validate.min.js"></script>
+    <script src="Scripts/Libs/Jquery/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="Scripts/Libs/Angular/angular.js"></script>
+    <script src="Scripts/Libs/Angular/angular-ui-router.min.js"></script>
+    <!--<script src="Scripts/Libs/Angular/angular-route.min.js"></script>-->
+
+    <script src="Scripts/Utils.js"></script>
+    <script src="Scripts/Routing.js"></script>
+    <script src="Scripts/Controllers/controllers.js"></script>
+    <script src="Scripts/Services/Auth.js"></script>
+    <script src="Scripts/Services/orderTrack.js"></script>
+    <script src="Scripts/Services/userService.js"></script>
+
+    
+    <script src="Scripts/Libs/Bootstrap/bootstrap.js"></script>
+    <script src="Scripts/Libs/Bootstrap/moment.min.js"></script>
+    <script src="Scripts/Libs/Bootstrap/bootstrap-datetimepicker.js"></script>
+    
+    <script src="Scripts/Libs/AngularGrowl/angular-growl.js"></script>
+
+    <script type="text/javascript">
+        //Root namespace
+        var OrderTrack = {};
+
+
+    </script>
+
+</html>

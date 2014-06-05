@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Recent Orders</div>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Description</th>
+                            <th>Budget</th>
+                            <th>Date</th>
+                            <th>Delivery</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat='order in orders' style="cursor: pointer;" ng-click="viewOrder(order.OrderID)">
+                        <td>{{order.OrderID}}</td>
+                        <td>{{order.Description}}</td>
+                        <td>{{order.Budget}}</td>
+                        <td>{{order.DateCreated|date:'dd/MM/yyyy'}}</td>
+                        <td>{{order.DeliveryDate|date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

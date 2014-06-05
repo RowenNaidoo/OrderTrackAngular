@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <select id="category" class="form-control" ng-model="CategoryID" ng-options="c.CategoryID as c.Name for c in categories" ng-change="getItemsByCatyegoryId()" style="z-index: 1000;">
+            <option value="0">Select Category</option>
+            <!--<option ng-repeat="category in categories" value="{{category.CategoryID}}">{{category.Name}}</option>-->
+        </select>
+    </div>
+</div>
+
+<div class="container-fluid" id="itemTable">
+    <div class="row" ng-repeat="rows in items | partition:4">
+        <div class="col-md-3" ng-repeat="item in rows">
+            <div ng-class="{'main': 1==true}">
+                <div ng-class="{'view view-first': 1==true}" style="text-align: center;">
+                    <center><img src="Images/{{item.ItemID}}.jpg"  width="55%" /></center>
+                    <div ng-class="{'mask': 1==true}">
+                        <h2>{{item.Name}}</h2>
+                        <p>{{item.Description}}</p>
+                        <input type="button" class="btn btn-primary" value="Add to Cart" ng-click="addItemsToCart(item.ItemID)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

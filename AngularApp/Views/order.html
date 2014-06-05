@@ -1,0 +1,29 @@
+﻿<div class="accordion" id="myAccordion">
+    
+    <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="collapse" data-target="#collapsible-1" data-parent="#myAccordion"><b>1. Order Details</b></div>
+        <div id="collapsible-1" class="collapse in" >
+            <div class="panel-body" id="orderDiv" ui-view="orderDetails">
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="collapse" data-target="#collapsible-2" data-parent="#myAccordion"><b>2. Select Items</b></div>
+        <div id="collapsible-2" class="collapse" >
+            <div class="panel-body" id="itemDiv" ui-view="orderItems">
+                order.items
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="collapse" data-target="#collapsible-3" data-parent="#myAccordion"><b>3. Cart</b></div>
+        <div id="collapsible-3" class="collapse">
+            <div class="panel-body" id="cartDiv" ui-view="orderCart">
+                order.cart
+            </div>
+        </div>
+    </div>
+
+</div>

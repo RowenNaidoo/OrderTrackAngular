@@ -1,0 +1,64 @@
+﻿<form id="orderForm" class="form" method="POST">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Order #</label>
+                <input type="text" class="form-control" name="OrderID" readonly="readonly" value="{{order.OrderID}}" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Date</label>
+                <input type="text" name="DateCreated" class="form-control" data-format="DD MMM YYYY" value="{{order.DateCreated|date:'dd/MM/yyyy'}}" readonly="readonly" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Budget</label>
+                <input type="text" name="Budget" id="Budget" class="form-control" value="{{order.Budget}}" readonly="readonly" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Delivery Date</label>
+                <div class='input-group date' id='deliveryDatePicker'>
+                    <input type='text' class="form-control" name="DeliveryDate" data-format="DD MMM YYYY"  value="{{order.DeliveryDate|date:'dd/MM/yyyy'}}" readonly="readonly" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="Description" class="form-control"  value="{{order.Description}}" readonly="readonly" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Comment</label>
+                <input type="text" name="Comment" class="form-control" readonly="readonly" />
+                <input type="hidden" name="AppUserID" value="{{order.AppUserID}}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+        <button type="button" class="btn btn-primary" onclick="OrderTrack.Order.CreateOrder.CreateNewOrder()">Create Order</button>
+            </div>
+        <div class="col-md-10" id="errorMessage">
+        </div>
+    </div>
+
+
+</form>

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OrderTrackModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="OrderTrackModelStoreContainer">
+    <EntitySet Name="AppUser" EntityType="OrderTrackModel.Store.AppUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CartItem" EntityType="OrderTrackModel.Store.CartItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Category" EntityType="OrderTrackModel.Store.Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CPA" EntityType="OrderTrackModel.Store.CPA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CPAStage" EntityType="OrderTrackModel.Store.CPAStage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Item" EntityType="OrderTrackModel.Store.Item" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order" EntityType="OrderTrackModel.Store.Order" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CartItem_AppUser" Association="OrderTrackModel.Store.FK_CartItem_AppUser">
+      <End Role="AppUser" EntitySet="AppUser" />
+      <End Role="CartItem" EntitySet="CartItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartItem_Item" Association="OrderTrackModel.Store.FK_CartItem_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="CartItem" EntitySet="CartItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartItem_Order" Association="OrderTrackModel.Store.FK_CartItem_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="CartItem" EntitySet="CartItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CPA_CPAStage" Association="OrderTrackModel.Store.FK_CPA_CPAStage">
+      <End Role="CPAStage" EntitySet="CPAStage" />
+      <End Role="CPA" EntitySet="CPA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CPAStage_Item" Association="OrderTrackModel.Store.FK_CPAStage_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="CPAStage" EntitySet="CPAStage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_Category" Association="OrderTrackModel.Store.FK_Item_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_AppUser" Association="OrderTrackModel.Store.FK_Job_AppUser">
+      <End Role="AppUser" EntitySet="AppUser" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AppUser">
+    <Key>
+      <PropertyRef Name="AppUserID" />
+    </Key>
+    <Property Name="AppUserID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CartItem">
+    <Key>
+      <PropertyRef Name="CartItemID" />
+    </Key>
+    <Property Name="CartItemID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ItemID" Type="bigint" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="Price" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="AppUserID" Type="bigint" Nullable="false" />
+    <Property Name="OrderID" Type="bigint" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="IsOrdered" Type="bit" Nullable="false" />
+    <Property Name="DateOrdered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CPA">
+    <Key>
+      <PropertyRef Name="CPAID" />
+    </Key>
+    <Property Name="CPAID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CPAStageID" Type="bigint" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="CartID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CPAStage">
+    <Key>
+      <PropertyRef Name="CPAStageID" />
+    </Key>
+    <Property Name="CPAStageID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="ItemID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="CategoryID" Type="bigint" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="ItemImage" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Budget" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="AppUserID" Type="bigint" Nullable="false" />
+    <Property Name="Comment" Type="text" />
+    <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CartItem_AppUser">
+    <End Role="AppUser" Type="OrderTrackModel.Store.AppUser" Multiplicity="1" />
+    <End Role="CartItem" Type="OrderTrackModel.Store.CartItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="AppUserID" />
+      </Principal>
+      <Dependent Role="CartItem">
+        <PropertyRef Name="AppUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartItem_Item">
+    <End Role="Item" Type="OrderTrackModel.Store.Item" Multiplicity="1" />
+    <End Role="CartItem" Type="OrderTrackModel.Store.CartItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="CartItem">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartItem_Order">
+    <End Role="Order" Type="OrderTrackModel.Store.Order" Multiplicity="1" />
+    <End Role="CartItem" Type="OrderTrackModel.Store.CartItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="CartItem">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CPA_CPAStage">
+    <End Role="CPAStage" Type="OrderTrackModel.Store.CPAStage" Multiplicity="1" />
+    <End Role="CPA" Type="OrderTrackModel.Store.CPA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CPAStage">
+        <PropertyRef Name="CPAStageID" />
+      </Principal>
+      <Dependent Role="CPA">
+        <PropertyRef Name="CPAStageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CPAStage_Item">
+    <End Role="Item" Type="OrderTrackModel.Store.Item" Multiplicity="1" />
+    <End Role="CPAStage" Type="OrderTrackModel.Store.CPAStage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="CPAStage">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_Category">
+    <End Role="Category" Type="OrderTrackModel.Store.Category" Multiplicity="1" />
+    <End Role="Item" Type="OrderTrackModel.Store.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_AppUser">
+    <End Role="AppUser" Type="OrderTrackModel.Store.AppUser" Multiplicity="1" />
+    <End Role="Order" Type="OrderTrackModel.Store.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="AppUserID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="AppUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,61 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <div class="jumbotron" id="aboutDiv"></div>
+    </div>
+    <div class="col-md-4">
+        <div class="jumbotron" id="architectureDiv">
+            <h2>Architecture</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="jumbotron" id="technologyDiv">
+            <h2>Technology</h2>
+        </div>
+    </div>
+</div>
+{{message}}
+<script type="text/javascript">
+
+    OrderTrack.Default = {};
+
+    OrderTrack.Default.DefaultContent = {
+
+        loadAbout: function () {
+            OrderTrack.Default.DefaultContent.loadContentWithAnimation('aboutDiv', '<h2>About</h2>' +
+                'Order Tracker is a basic concept for creating orders by requesting various items available for purchase. First log in using your credentials, then shop by category. Once you have decided on the items you are interested in simply add them to your cart and the costs will be calculated accordingly. Once you\'re done shopping simply check out.');
+        },
+        loadArchitecture: function () {
+            OrderTrack.Default.DefaultContent.loadContentWithAnimation('architectureDiv', '<h2>Architecture</h2>Order Tracker is a basic concept for creating orders by requesting various items available for purchase. First log in using your credentials, then shop by category. Once you have decided on the items you are interested in simply add them to your cart and the costs will be calculated accordingly. Once you\'re done shopping simply check out.');
+        },
+        loadTechnology: function () {
+            OrderTrack.Default.DefaultContent.loadContentWithAnimation('technologyDiv', '<h2>Technology</h2>Order Tracker is a basic concept for creating orders by requesting various items available for purchase. First log in using your credentials, then shop by category. Once you have decided on the items you are interested in simply add them to your cart and the costs will be calculated accordingly. Once you\'re done shopping simply check out.');
+
+
+        },
+
+        loadContentWithAnimation: function (divName, contentToLoad) {
+            //$("#" + divName).showLoading();
+
+            $("#temp").html(contentToLoad);
+            var theHeight = $("#temp").height();
+
+            $("#" + divName).animate({
+                height: theHeight + 400
+            }, "slow");
+
+            $("#" + divName).html(contentToLoad);
+
+            //$("#" + divName).hideLoading();
+        }
+    };
+
+
+    $(document).ready(function () {
+        //$("body").showLoading();
+        setTimeout(function () { OrderTrack.Default.DefaultContent.loadAbout(); }, 500);
+        setTimeout(function () { OrderTrack.Default.DefaultContent.loadArchitecture(); }, 1000);
+        setTimeout(function () { OrderTrack.Default.DefaultContent.loadTechnology(); }, 1500);
+        //setTimeout(function () { $("body").hideLoading(); }, 2400);
+
+    });
+</script>

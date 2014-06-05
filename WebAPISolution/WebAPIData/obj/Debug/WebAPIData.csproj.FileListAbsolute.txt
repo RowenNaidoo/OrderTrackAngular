@@ -1,0 +1,16 @@
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\obj\Debug\WebAPIData.csprojResolveAssemblyReference.cache
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\bin\Debug\WebAPIData.dll.config
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\bin\Debug\WebAPIData.dll
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\bin\Debug\WebAPIData.pdb
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\bin\Debug\EntityFramework.dll
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\bin\Debug\EntityFramework.xml
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\obj\Debug\WebAPIData.dll
+C:\Dropbox\Portfolio\WebAPI\Solution\WebAPIData\obj\Debug\WebAPIData.pdb
+C:\Projects.Net4.5\Solution\WebAPIData\bin\Debug\WebAPIData.dll.config
+C:\Projects.Net4.5\Solution\WebAPIData\bin\Debug\WebAPIData.dll
+C:\Projects.Net4.5\Solution\WebAPIData\bin\Debug\WebAPIData.pdb
+C:\Projects.Net4.5\Solution\WebAPIData\bin\Debug\EntityFramework.dll
+C:\Projects.Net4.5\Solution\WebAPIData\bin\Debug\EntityFramework.xml
+C:\Projects.Net4.5\Solution\WebAPIData\obj\Debug\WebAPIData.csprojResolveAssemblyReference.cache
+C:\Projects.Net4.5\Solution\WebAPIData\obj\Debug\WebAPIData.dll
+C:\Projects.Net4.5\Solution\WebAPIData\obj\Debug\WebAPIData.pdb
