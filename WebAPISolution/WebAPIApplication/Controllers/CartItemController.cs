@@ -63,6 +63,14 @@ namespace WebAPIApplication.Controllers
             return new CartItem().Update(cartitem);
         }
 
+        // POST api/values
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.ActionName("Checkout")]
+        public Boolean Checkout(long orderId)
+        {
+            return new CartItem().Checkout(orderId);
+        }
+
         // PUT api/values/5
         [System.Web.Http.HttpPut]
         [System.Web.Http.ActionName("Insert")]

@@ -73,14 +73,14 @@
             insertCartItem: function (itemId, userId, orderId) {
                 var dfd = $q.defer();
                 
-                var cartItem = {};
-                cartItem.ItemID = itemId;
-                cartItem.AppUserID = userId;
-                cartItem.OrderID = orderId;
+                var cartitem = {};
+                cartitem.ItemID = itemId;
+                cartitem.AppUserID = userId;
+                cartitem.OrderID = orderId;
 
-                console.log(cartItem);
+                console.log(cartitem);
 
-                return $http.put("http://localhost/OrderTrackAPI/api/CartItem/Insert", cartItem )
+                return $http.put("http://localhost/OrderTrackAPI/api/CartItem/Insert", JSON.stringify(cartitem), {headers: {'Content-Type': 'application/json'}})
 	                .then(function (response) {
 	                    //if (typeof response.data === 'object') {
 	                    console.log(response.data);
@@ -107,6 +107,30 @@
 	                }, function (response) {
 	                    // something went wrong
 	                    dfd.reject('error');
+	                    return dfd.promise;
+	                });
+            },
+
+            checkOut: function(orderId) {
+                var dfd = $q.defer();
+
+                return $http.post("http://localhost/OrderTrackAPI/api/CartItem/Checkout", { orderId: orderId })
+                //$http({
+                //    method: "POST",
+                //    url: "http://localhost/OrderTrackAPI/api/CartItem/Checkout",
+                //    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                //    data: { orderId: orderId }
+                //})
+	                .then(function (response) {
+	                    //if (typeof response.data === 'object') {
+	                    //console.log(response.data);
+	                    dfd.resolve(response.data);
+	                    return dfd.promise;
+
+	                }, function (response) {
+	                    // something went wrong
+	                    dfd.reject('error');
+	                    console.log(response);
 	                    return dfd.promise;
 	                });
             }

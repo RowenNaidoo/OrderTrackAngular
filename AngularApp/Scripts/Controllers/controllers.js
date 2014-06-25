@@ -1,7 +1,51 @@
 ﻿// create the module and name it
 // ngRoue is no longer included in angular.js so specify it as a dependancy
 //any other modules and services need to be injected here as well
-var apiApp = angular.module('apiApp', ['ui.router', 'auth', 'angular-growl', 'orderTrack', 'user']);
+var apiApp = angular.module('apiApp', ['ui.router', 'auth', 'angular-growl', 'orderTrack', 'user'], function($httpProvider) {
+    // Use x-www-form-urlencoded Content-Type
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+    /**
+     * The workhorse; converts an object to x-www-form-urlencoded serialization.
+     * @param {Object} obj
+     * @return {String}
+     */
+    var param = function (obj) {
+        var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+
+        for (name in obj) {
+            value = obj[name];
+
+            if (value instanceof Array) {
+                for (i = 0; i < value.length; ++i) {
+                    subValue = value[i];
+                    fullSubName = name + '[' + i + ']';
+                    innerObj = {};
+                    innerObj[fullSubName] = subValue;
+                    query += param(innerObj) + '&';
+                }
+            }
+            else if (value instanceof Object) {
+                for (subName in value) {
+                    subValue = value[subName];
+                    fullSubName = name + '[' + subName + ']';
+                    innerObj = {};
+                    innerObj[fullSubName] = subValue;
+                    query += param(innerObj) + '&';
+                }
+            }
+            else if (value !== undefined && value !== null)
+                query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+        }
+
+        return query.length ? query.substr(0, query.length - 1) : query;
+    };
+
+    // Override $http service's default transformRequest
+    $httpProvider.defaults.transformRequest = [function (data) {
+        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+    }];
+});
 
 ////initialize user object in rootscope
 //apiApp.run(function ($rootScope) {
@@ -185,7 +229,7 @@ apiApp.controller('vieworderController', function ($scope, $stateParams, orderTr
         });
 });
 
-apiApp.controller('orderitemsController', function ($scope, $stateParams, orderTrackServices, $sce, $compile, userService, growl) {
+apiApp.controller('orderitemsController', function ($rootScope, $scope, $stateParams, orderTrackServices, $sce, $compile, userService, growl) {
     //get data for view
     
     //categories
@@ -209,13 +253,13 @@ apiApp.controller('orderitemsController', function ($scope, $stateParams, orderT
             });
 
         $scope.addItemsToCart = function(itemId) {
-            alert(itemId);
             orderTrackServices.insertCartItem(itemId, userService.getCurrentUserID(), $stateParams.orderid)
             .then(function(data) {
                 //console.log(data);
                 growl.addSuccessMessage("Item added to cart");
+                $rootScope.$broadcast('itemAdded');
             }, function(error) {
-                growl.addErrorMessage("Item added to cart");
+                growl.addErrorMessage("Error adding item to cart");
             });
         };
     };
@@ -232,6 +276,25 @@ apiApp.controller('ordercartController', function ($scope, $stateParams, orderTr
 
     $scope.calculatePrice = function(index) {
         $scope.cartitems[index].Price = $scope.cartitems[index].Quantity * $scope.cartitems[index].UnitPrice;
+    };
+
+    $scope.$on('itemAdded', function (event, args) {
+        orderTrackServices.getCartItemsforOrder($stateParams.orderid)
+        .then(function (data) {
+            $scope.cartitems = data;
+        }, function (error) {
+
+        });
+    });
+
+    $scope.checkout = function() {
+        //categories
+        orderTrackServices.checkOut($stateParams.orderid)
+            .then(function (data) {
+            alert(data);
+        }, function (error) {
+                alert(error);
+            });
     };
 });
 

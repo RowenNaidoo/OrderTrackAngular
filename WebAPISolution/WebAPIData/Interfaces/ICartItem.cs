@@ -14,5 +14,6 @@ namespace WebAPIData.Interfaces
         List<CartItem> GetByOrderID(long orderId);
         CartItem Update(CartItem cartitem);
         Boolean Delete(long id);
+        Boolean Checkout(long OrderID);
     }
 }

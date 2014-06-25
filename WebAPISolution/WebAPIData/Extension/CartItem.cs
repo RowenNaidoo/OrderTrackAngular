@@ -7,7 +7,7 @@ using WebAPIData.Interfaces;
 
 namespace WebAPIData
 {
-    public partial class CartItem:ICartItem
+    public partial class CartItem : ICartItem
     {
 
         //Create
@@ -33,9 +33,9 @@ namespace WebAPIData
         //Retrieve By ID
         public CartItem GetByID(long Id)
         {
-            using(OrderTrackEntities ctx = new OrderTrackEntities())
+            using (OrderTrackEntities ctx = new OrderTrackEntities())
             {
-                return ctx.CartItem.First(x=>x.CartItemID == Id);
+                return ctx.CartItem.First(x => x.CartItemID == Id);
             }
         }
 
@@ -63,7 +63,7 @@ namespace WebAPIData
         //Delete By ID
         public Boolean Delete(long id)
         {
-            using(OrderTrackEntities ctx= new OrderTrackEntities())
+            using (OrderTrackEntities ctx = new OrderTrackEntities())
             {
                 try
                 {
@@ -76,6 +76,30 @@ namespace WebAPIData
                 {
                     return false;
                 }
+            }
+        }
+
+        //checkout
+        public Boolean Checkout(long OrderID)
+        {
+            try
+            {
+                using (OrderTrackEntities ctx = new OrderTrackEntities())
+                {
+                    var items = GetByOrderID(OrderID);
+                    foreach (var item in items)
+                    {
+                        item.IsOrdered = true;
+                        item.DateOrdered = DateTime.Now;
+                        CartItem cartItem = new CartItem().Update(item);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }
